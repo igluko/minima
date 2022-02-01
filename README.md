@@ -1,0 +1,2 @@
+# minima
+Minima in docker
