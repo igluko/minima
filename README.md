@@ -25,18 +25,19 @@ docker run -d --restart unless-stopped minima
 Get containers list:
 ```
 docker ps
-CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                            PORTS     NAMES
-5cb8cb68f092   minima    "/bin/sh -c '/usr/bi…"   3 minutes ago   Restarting (127) 52 seconds ago             laughing_grothendieck
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                            PORTS           NAMES
+4b656095eac4   minima         "/bin/sh -c 'java -X…"   3 seconds ago    Up 1 second                       9001-9002/tcp   silly_haslett
+fbf00e8b6ecb   minima         "/bin/sh -c 'java -X…"   4 seconds ago    Up 3 seconds                      9001-9002/tcp   sad_fermat
 ```
 
 Get IP by id
 ```
-docker inspect 5cb8cb68f092 | jq .[].NetworkSettings.Networks.bridge.IPAddress
+docker inspect 4b656095eac4 | jq .[].NetworkSettings.Networks.bridge.IPAddress
 "172.17.0.3"
 ```
 
 Get IP by name
 ```
-docker inspect laughing_grothendieck | jq .[].NetworkSettings.Networks.bridge.IPAddress
-"172.17.0.3"
+docker inspect sad_fermat | jq .[].NetworkSettings.Networks.bridge.IPAddress
+"172.17.0.4"
 ```
