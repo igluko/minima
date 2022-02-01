@@ -41,13 +41,13 @@ docker inspect 4b656095eac4 | jq .[].NetworkSettings.Networks.bridge.IPAddress
 
 Get IP by name
 ```
-docker inspect sad_fermat | jq .[].NetworkSettings.Networks.bridge.IPAddress
+docker inspect silly_haslett | jq .[].NetworkSettings.Networks.bridge.IPAddress
 ```
->"172.17.0.4"
+>"172.17.0.3"
 
 Login in account Incentivecash and copy IP node to your container: 
 ```
-curl 127.0.0.1:9002/incentivecash+uid:ID_your_node | jq
+curl 172.17.0.3:9002/incentivecash+uid:ID_your_node | jq
 ```
 It must return "true"
 
