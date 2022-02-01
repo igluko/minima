@@ -1,9 +1,9 @@
 # minima
 Minima in docker
 
-Howto (Ubuntu 20.04):
+# Howto (Ubuntu 20.04):
 
-Build
+Build:
 ```
 apt update
 apt upgrade -y
