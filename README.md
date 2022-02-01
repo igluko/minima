@@ -33,13 +33,13 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 fbf00e8b6ecb   minima         "/bin/sh -c 'java -X…"   4 seconds ago    Up 3 seconds                      9001-9002/tcp   sad_fermat
 ```
 
-Get IP by id
+Get IP by id:
 ```
 docker inspect 4b656095eac4 | jq .[].NetworkSettings.Networks.bridge.IPAddress
 ```
 >"172.17.0.3"
 
-Get IP by name
+Get IP by name:
 ```
 docker inspect silly_haslett | jq .[].NetworkSettings.Networks.bridge.IPAddress
 ```
