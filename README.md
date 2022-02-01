@@ -41,3 +41,11 @@ Get IP by name
 docker inspect sad_fermat | jq .[].NetworkSettings.Networks.bridge.IPAddress
 "172.17.0.4"
 ```
+Login in account Incentivecash and copy IP node to your container: 
+```
+curl 127.0.0.1:9002/incentivecash+uid:ID_your_node | jq
+```
+It must return "true"
+
+Return to the Incentivecash and you mast see ping to your node.
+Done.
