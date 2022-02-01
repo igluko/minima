@@ -51,5 +51,5 @@ curl 172.17.0.3:9002/incentivecash+uid:ID_your_node | jq
 ```
 It must return "true"
 
-Return to the Incentivecash and you mast see ping to your node.
+Return to the Incentivecash and will be able to see ping.
 Done.
