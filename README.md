@@ -37,7 +37,7 @@ Get IP by id
 ```
 docker inspect 4b656095eac4 | jq .[].NetworkSettings.Networks.bridge.IPAddress
 ```
-"172.17.0.3"
+>"172.17.0.3"
 
 Get IP by name
 ```
