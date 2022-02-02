@@ -7,7 +7,7 @@ Build:
 ```
 apt update
 apt upgrade -y
-apt install docker docker-compose
+apt install docker docker-compose jq
 wget https://raw.githubusercontent.com/igluko/minima/main/Dockerfile
 docker build . -t minima
 ```
