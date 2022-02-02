@@ -45,7 +45,7 @@ docker inspect silly_haslett | jq .[].NetworkSettings.Networks.bridge.IPAddress
 ```
 >"172.17.0.3"
 
-Login in account Incentivecash and copy IP node to your container: 
+Login in account Incentivecash and copy ID node to your container: 
 ```
 curl 172.17.0.3:9002/incentivecash+uid:ID_your_node | jq
 ```
