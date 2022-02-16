@@ -1,14 +1,14 @@
 # minima
 Minima in docker
 
-# Howto (Ubuntu 20.04):
+# Howto start (Ubuntu 20.04):
 
 Build:
 ```
-apt update
-apt upgrade -y
-apt install docker docker-compose jq curl -y
-wget https://raw.githubusercontent.com/igluko/minima/main/Dockerfile
+apt update \
+apt upgrade -y \
+apt install docker docker-compose jq curl -y \
+curl https://raw.githubusercontent.com/igluko/minima/main/Dockerfile > Dockerfile \
 docker build . -t minima
 ```
 
@@ -53,3 +53,12 @@ It must return "true"
 
 Return to the Incentivecash and will be able to see ping.
 Done.
+
+# Howto update:
+Remove all containers:
+```
+docker kill $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+```
+Then use Howto start (Ubuntu 20.04) steps.
