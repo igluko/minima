@@ -57,8 +57,8 @@ Done.
 # Howto update:
 Remove all containers:
 ```
-docker kill $(docker ps -q) && \
-docker rm $(docker ps -a -q) && \
+docker kill $(docker ps -q);  \
+docker rm $(docker ps -a -q); \
 docker rmi $(docker images -q)
 ```
 Then use Howto start (Ubuntu 20.04) steps.
