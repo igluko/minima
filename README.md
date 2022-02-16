@@ -10,7 +10,6 @@ apt upgrade -y && \
 apt install docker docker-compose jq curl -y && \
 curl https://raw.githubusercontent.com/igluko/minima/main/Dockerfile > Dockerfile && \
 docker build . -t minima
-
 ```
 
 Start one:
@@ -61,6 +60,5 @@ Remove all containers:
 docker kill $(docker ps -q);  \
 docker rm $(docker ps -a -q); \
 docker rmi $(docker images -q)
-
 ```
 Then use Howto start (Ubuntu 20.04) steps.
