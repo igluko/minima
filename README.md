@@ -24,7 +24,7 @@ docker run -d --restart unless-stopped minima
 
 Get containers list:
 ```
-docker ps
+docker ps -a
 ```
 
 ```
