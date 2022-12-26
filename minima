@@ -151,7 +151,8 @@ then
         MDS_PASSWORD=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20 ; echo '')
     fi
     update MDS_PASSWORD
-
+    printf "\n"
+    
     # Меняем ограничение памяти
     MEM=$((${MEM_TOTAL} / ${INSTANCE_NUMBER}))
     FILE="docker-compose.yml"
