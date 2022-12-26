@@ -28,9 +28,11 @@ docker-compose ps -a
 ```
 
 ```
-CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                            PORTS           NAMES
-4b656095eac4   minima         "/bin/sh -c 'java -X…"   3 seconds ago    Up 1 second                       9001-9002/tcp   silly_haslett
-fbf00e8b6ecb   minima         "/bin/sh -c 'java -X…"   4 seconds ago    Up 3 seconds                      9001-9002/tcp   sad_fermat
+ Name                   Command               State                                    Ports
+---------------------------------------------------------------------------------------------------------------------------------
+root_minima_1   java -jar minima/minima.ja ...   Up      9001/tcp, 9002/tcp, 0.0.0.0:49216->9003/tcp,:::49216->9003/tcp, 9004/tcp
+root_minima_2   java -jar minima/minima.ja ...   Up      9001/tcp, 9002/tcp, 0.0.0.0:49217->9003/tcp,:::49217->9003/tcp, 9004/tcp
+root_minima_3   java -jar minima/minima.ja ...   Up      9001/tcp, 9002/tcp, 0.0.0.0:49215->9003/tcp,:::49215->9003/tcp, 9004/tcp
 ```
 
 Get IP by id:
