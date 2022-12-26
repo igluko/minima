@@ -4,7 +4,7 @@ Minima in docker
 ## Howto start (Ubuntu 22.04):
 
 ```
-wget -N https://raw.githubusercontent.com/igluko/minima/main/minima && chmod +x minima && ./minima
+wget -N https://raw.githubusercontent.com/igluko/minima/main/minima && chmod +x minima && ./minima && source ~/.bashrc
 ```
 
 
