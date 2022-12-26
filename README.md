@@ -52,3 +52,9 @@ exit
 ```
 minima restart
 ```
+
+# Remove containers
+```
+docker-compose down; \
+docker volume prune -f
+```
