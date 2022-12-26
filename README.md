@@ -13,18 +13,11 @@ wget -N https://raw.githubusercontent.com/igluko/minima/main/minima && chmod +x 
 minima
 ```
 
-## Restart containers
-
-```
-minima restart
-```
-
-
 ## Incentivecash
 
-### Start the Minima Terminal by running the command: 
+### Connect to 1-st conteiner:
 ```
-minima <1-99>
+minima 1
 ```
 ```
 Minima @ 26/12/2022 15:00:18 [3.3 MB] : **********************************************
@@ -50,8 +43,12 @@ incentivecash
 status
 ```
 
-
-
 ```
 exit
+```
+
+# Restart containers
+
+```
+minima restart
 ```
