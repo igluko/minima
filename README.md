@@ -1,16 +1,16 @@
 # minima
 Minima in docker
 
-# Howto start (Ubuntu 20.04):
+# Howto start (Ubuntu 22.04):
 
-Build:
+Install Docker:
 ```
 apt update && \
 apt upgrade -y && \
-apt install docker docker-compose jq curl -y && \
-curl https://raw.githubusercontent.com/igluko/minima/main/Dockerfile > Dockerfile && \
-docker build . -t minima
+apt install docker docker-compose jq git -y
 ```
+
+
 
 Start one:
 ```
