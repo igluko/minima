@@ -91,18 +91,44 @@ function apt-install {
     done
 }
 
+function insert {
+    FILE="${1}"
+    REPLACE="${2}"
+
+    eval "touch ${FILE}"
+
+    if [[ $# -eq 2 ]]
+    then
+        MATCH="$2"
+    else
+        MATCH="$3"
+    fi
+
+    if ! eval "grep -q \"${REPLACE}\" ${FILE}"
+    then
+        eval "echo \"${REPLACE}\" >> ${FILE}"
+    else
+        ESCAPED_REPLACE=$(printf '%s\n' "$REPLACE" | sed -e 's/[\/&]/\\&/g')
+        ESCAPED_MATCH=$(printf '%s\n' "$MATCH" | sed -e 's/[\/&]/\\&/g')
+        eval "sed -i '/${ESCAPED_MATCH}/ s/.*/${ESCAPED_REPLACE}/' ${FILE}"
+    fi
+}
+
 #-----------------------START-----------------------#
 
 if [[ $# -eq 0 ]]
 then
+    #Добвляем папку скрипта в PATH
+    insert ~/.bashrc "export PATH=\"$PATH:${SCRIPTPATH}\""
+    set +eEu
+    source ~/.bashrc
+    set -eEu
+
     # Ставим пакеты
-    apt-install docker docker-compose jq git
+    apt-install git docker docker-compose jq
 
     # Скачиваем compose файл
     wget -N https://raw.githubusercontent.com/igluko/minima/main/docker-compose.yml
-
-    # Обновляем docker images
-    docker-compose pull
 
     # Получаем общее количество памяти на хосте
     MEM_TOTAL=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
@@ -140,7 +166,13 @@ then
     docker-compose ps -a
 
     # Отдаем ссылки для подклчения к MDS
-    
+    printf  "\n${ORANGE}Адреса для доступа к MiniDapp ниже:${NC}\n"
+    IP=$(hostname -i)
+    PORTS=$(docker ps --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{(index (index .NetworkSettings.Ports "9003/tcp") 0).HostPort}}' 2>/dev/null || true) 
+    for PORT in $PORTS
+    do
+        printf "https://${IP}:$PORT\n"
+    done
 
 elif [[ $# -eq 1 ]]
 then
