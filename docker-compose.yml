@@ -3,7 +3,7 @@ services:
   minima:
     image: minimaglobal/minima
     environment:
-      minima_mdspassword: "123"
+      minima_mdspassword: 123
       minima_server: "true"
     ports:
       - 9003
@@ -11,3 +11,17 @@ services:
       - /home/minima/data
     restart: unless-stopped
     mem_limit: 512m
+    labels:
+        - "com.centurylinklabs.watchtower.enable=true"
+  watchtower:
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
