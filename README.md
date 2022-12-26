@@ -33,6 +33,12 @@ incentivecash uid:xxxxxxxxxxxxxxxxxx
 ```
 incentivecash
 ```
+### Check status
+```
+status
+```
+
+
 
 ```
 exit
