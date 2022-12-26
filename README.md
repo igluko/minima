@@ -18,7 +18,9 @@ Change to YOUR_PASSWORD
 sed -i '/minima_mdspassword/ s/123/YOUR_PASSWORD/g'  docker-compose.yml
 ```
 Check it
-```cat docker-compose.yml | grep minima_mdspassword```
+```
+cat docker-compose.yml | grep minima_mdspassword
+```
 
 ## 2. Start containers
 
