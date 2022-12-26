@@ -167,7 +167,7 @@ then
 
     # Отдаем ссылки для подклчения к MDS
     printf  "\n${ORANGE}Адреса для доступа к MiniDapp ниже:${NC}\n\n"
-    IP=$(hostname -i)
+    IP=$(curl -s https://api.ipify.org)
     PORTS=$(docker ps --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{(index (index .NetworkSettings.Ports "9003/tcp") 0).HostPort}}' 2>/dev/null || true) 
     for PORT in $PORTS
     do
