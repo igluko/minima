@@ -72,6 +72,10 @@ incentivecash uid:xxxxxxxxxxxxxxxxxx
 incentivecash
 ```
 
+```
+exit
+```
+
 
 ## MiniDap
 
