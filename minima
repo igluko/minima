@@ -152,7 +152,7 @@ then
     fi
     update MDS_PASSWORD
     printf "\n"
-    
+
     # Меняем ограничение памяти
     MEM=$((${MEM_TOTAL} / ${INSTANCE_NUMBER}))
     FILE="docker-compose.yml"
@@ -178,7 +178,13 @@ then
 
 elif [[ $# -eq 1 ]]
 then
-    docker exec -it root_minima_${1} minima
+    if [[ $1 = "restart" ]]
+    then
+        docker-compose stop
+        docker-compose up -d --scale minima=${INSTANCE_NUMBER}
+    else
+        docker exec -it root_minima_${1} minima
+    fi
 fi
 
 
