@@ -3,13 +3,14 @@ Minima in docker
 
 # Howto start (Ubuntu 22.04):
 
-Install Docker:
+Install Docker and download docker-compose.yml:
 ```
 apt update && \
 apt upgrade -y && \
-apt install docker docker-compose jq git -y
-```
+apt install docker docker-compose jq git -y && \
+curl https://raw.githubusercontent.com/igluko/minima/main/docker-compose.yml  -o docker-compose.yml
 
+```
 
 
 Start one:
