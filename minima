@@ -139,8 +139,8 @@ then
     # Проверяем
     docker-compose ps -a
 
-    docker run -d --restart unless-stopped --name watchtower -e WATCHTOWER_CLEANUP=true -e WATCHTOWER_TIMEOUT=60s -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
-
+    # Отдаем ссылки для подклчения к MDS
+    
 
 elif [[ $# -eq 1 ]]
 then
