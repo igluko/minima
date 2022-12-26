@@ -3,7 +3,7 @@ Minima in docker
 
 # Howto start (Ubuntu 22.04):
 
-Install Docker and download docker-compose.yml:
+Install Docker and download compose file:
 ```
 apt update && \
 apt upgrade -y && \
@@ -12,20 +12,19 @@ curl https://raw.githubusercontent.com/igluko/minima/main/docker-compose.yml  -o
 
 ```
 
+Start 1 minima container (scale 1):
+```
+docker-compose up -d --scale minima=1
+```
 
-Start one:
+Start another 2 minima container (scale 3):
 ```
-docker run -d --restart unless-stopped minima
-```
-
-Start another:
-```
-docker run -d --restart unless-stopped minima
+docker-compose up -d --scale minima=3
 ```
 
 Get containers list:
 ```
-docker ps -a
+docker-compose ps -a
 ```
 
 ```
