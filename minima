@@ -116,6 +116,9 @@ function insert {
 
 #-----------------------START-----------------------#
 
+# Загружаем файл с настройками
+load ${SCRIPTPATH}/.env
+
 if [[ $# -eq 0 ]]
 then
     #Добвляем папку скрипта в PATH
@@ -132,9 +135,6 @@ then
 
     # Получаем общее количество памяти на хосте
     MEM_TOTAL=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
-
-    # Загружаем файл с настройками
-    load ${SCRIPTPATH}/.env
 
     # Задаем количество инстансов
     if ! [[ -v INSTANCE_NUMBER ]]
