@@ -56,6 +56,16 @@ It must return "true"
 Return to the Incentivecash and will be able to see ping.
 Done.
 
+Get port to MiniDap
+```
+docker ps --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{.Name}} {{.NetworkSettings.Networks.root_default.IPAddress}} {{(index (index .NetworkSettings.Ports "9003/tcp") 0).HostPort}}'
+```
+```
+/root_minima_2 172.18.0.3 49217
+/root_minima_1 172.18.0.2 49216
+/root_minima_3 172.18.0.4 49215
+```
+
 # Howto update:
 Remove all containers:
 ```
