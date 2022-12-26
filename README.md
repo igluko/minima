@@ -8,9 +8,9 @@ wget -N https://raw.githubusercontent.com/igluko/minima/main/minima && chmod +x 
 ```
 
 
-## 4 Incentivecash
+#Incentivecash
 
-### Start the Minima Terminal by running the command: 
+## Start the Minima Terminal by running the command: 
 ```
 minima <1-99>
 ```
@@ -25,11 +25,11 @@ Minima @ 26/12/2022 15:00:18 [3.7 MB] : ****************************************
 Minima @ 26/12/2022 15:00:18 [3.7 MB] : Welcome to the Minima RPCClient - for assistance type help. Then press enter.
 Minima @ 26/12/2022 15:00:18 [3.7 MB] : To 'exit' this app use 'exit'. 'quit' will shutdown Minima
 ```
-### Setup your Incentive Program account by connecting your Incentive ID (xxxxxxxxxxxxxxxxxx)
+## Setup your Incentive Program account by connecting your Incentive ID (xxxxxxxxxxxxxxxxxx)
 ```
 incentivecash uid:xxxxxxxxxxxxxxxxxx
 ```
-### Check your Incentive Program balance
+## Check your Incentive Program balance
 ```
 incentivecash
 ```
