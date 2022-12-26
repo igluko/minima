@@ -56,7 +56,8 @@ It must return "true"
 Return to the Incentivecash and will be able to see ping.
 Done.
 
-Get port to MiniDap
+###Get port to MiniDap
+To enter MiniDapp minima_1, you need to open the address: https://YourServerIP:49197 in your browser
 ```
 docker ps --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{.Name}} {{.NetworkSettings.Networks.root_default.IPAddress}} {{(index (index .NetworkSettings.Ports "9003/tcp") 0).HostPort}}'
 ```
@@ -65,6 +66,7 @@ docker ps --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{.Nam
 /root_minima_1 172.18.0.2 49216
 /root_minima_3 172.18.0.4 49215
 ```
+
 
 # Howto update:
 Remove all containers:
