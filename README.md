@@ -7,6 +7,18 @@ Minima in docker
 wget -N https://raw.githubusercontent.com/igluko/minima/main/minima && chmod +x minima && ./minima && source ~/.bashrc
 ```
 
+## Change password or number of containers
+
+```
+minima
+```
+
+## Restart containers
+
+```
+minima restart
+```
+
 
 ## Incentivecash
 
