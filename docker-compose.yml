@@ -3,10 +3,11 @@ services:
   minima:
     image: minimaglobal/minima
     environment:
-      minima_mdspassword: "123"
+#      minima_mdspassword: "123"
       minima_server: "true"
     ports:
-      - 9001-9004
+#       - 9001-9004
+      - 9003
     volumes:
       - /home/minima/data
     restart: unless-stopped
