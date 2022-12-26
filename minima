@@ -72,7 +72,7 @@ function update {
     local VALUE="$(echo ${!1} | xargs)"
 
     printf "\n${RED}Please input ${VARIABLE}${NC}\n"
-    read -e -p "> " -i "${VALUE}" ${VARIABLE}
+    read -r -e -p "> " -i "${VALUE}" ${VARIABLE}
     save ${VARIABLE} ${FILE}
     # echo "$VARIABLE is $VALUE"
 }
