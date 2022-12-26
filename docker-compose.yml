@@ -1,16 +1,17 @@
 version: "2.4"
 services:
   minima:
+    name: minima
     image: minimaglobal/minima
     environment:
-      minima_mdspassword: 123
+      minima_mdspassword: UCwRo4iMnxZ0zRvF7jFw
       minima_server: "true"
     ports:
       - 9003
     volumes:
       - /home/minima/data
     restart: unless-stopped
-    mem_limit: 512m
+    mem_limit: 2008868k
     labels:
         - "com.centurylinklabs.watchtower.enable=true"
   watchtower:
