@@ -136,13 +136,14 @@ then
     # Получаем общее количество памяти на хосте
     MEM_TOTAL=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
 
-    # Задаем количество инстансов
-    if ! [[ -v INSTANCE_NUMBER ]]
-    then
-        # Задаем 1 инстанс, если переменная пустая
-        INSTANCE_NUMBER="1"
-    fi
-    update INSTANCE_NUMBER
+    # # Задаем количество инстансов
+    # if ! [[ -v INSTANCE_NUMBER ]]
+    # then
+    #     # Задаем 1 инстанс, если переменная пустая
+    #     INSTANCE_NUMBER="1"
+    # fi
+    # update INSTANCE_NUMBER
+    INSTANCE_NUMBER="1"
 
     # Задаем пароль
     if ! [[ -v MDS_PASSWORD ]]
