@@ -150,7 +150,7 @@ then
         # Генерируем пароль, если старого пароля нет
         MDS_PASSWORD=$(tr -dc a-z0-9 </dev/urandom | head -c 20 ; echo '')
     fi
-    printf "\nWarning. Minima does not support uppercase characters in passwords\n"
+    printf "\n${ORANGE}Warning. Minima does not support uppercase characters in passwords${NC}\n"
     update MDS_PASSWORD
     printf "\n"
 
