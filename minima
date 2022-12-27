@@ -128,7 +128,7 @@ then
     set -eEu
 
     # Ставим пакеты
-    apt-install git docker docker-compose jq
+    apt-install curl docker docker-compose jq
 
     # Скачиваем compose файл
     wget -N https://raw.githubusercontent.com/igluko/minima/main/docker-compose.yml
