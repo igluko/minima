@@ -6,7 +6,7 @@ services:
       minima_mdspassword: UCwRo4iMnxZ0zRvF7jFw
       minima_server: "true"
     ports:
-      - 9003
+      - 9001-9004:9001-9004
     volumes:
       - /home/minima/data
     restart: unless-stopped
