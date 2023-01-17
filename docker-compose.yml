@@ -14,8 +14,7 @@ services:
     labels:
         - "com.centurylinklabs.watchtower.enable=true"
     healthcheck:
-      test: ["CMD", "minima", "check"]
-      interval: 30s
+      test: "LAST=$$(cat LAST); CURRENT=$$(curl -s localhost:9005/status | jq .response.chain.block) || ( apt update && apt inst>      interval: 600s
       timeout: 10s
       retries: 1
   watchtower:

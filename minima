@@ -252,9 +252,6 @@ then
                 GET_MINIMA_STATUS_BY_IP ${IP}
             done
         done
-    elif [[ $1 = "status" ]]
-    then
-        return true
     else
         docker exec -it root_minima_${1} minima
     fi
