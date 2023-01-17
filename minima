@@ -168,9 +168,10 @@ function GET_NETWORK {
     docker network ls | grep minima | awk '{print $1}'
 }
 
-
 # Загружаем файл с настройками
 load ${SCRIPT_PATH}/.env
+
+INSTANCE_NUMBER="1"
 
 if [[ $# -eq 0 ]]
 then
@@ -196,7 +197,6 @@ then
     #     INSTANCE_NUMBER="1"
     # fi
     # update INSTANCE_NUMBER
-    INSTANCE_NUMBER="1"
 
     # Задаем пароль
     if ! [[ -v MDS_PASSWORD ]]
