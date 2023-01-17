@@ -12,6 +12,10 @@ wget -N https://raw.githubusercontent.com/igluko/minima/main/minima && chmod +x 
 ```
 minima
 ```
+## Check status
+```
+minima status
+```
 
 ## Incentivecash
 
@@ -37,14 +41,6 @@ incentivecash uid:xxxxxxxxxxxxxxxxxx
 ### Check your Incentive Program balance
 ```
 incentivecash
-```
-### Check status
-```
-status
-```
-
-```
-exit
 ```
 
 # Restart containers
