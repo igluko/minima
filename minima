@@ -244,6 +244,7 @@ then
         docker-compose up -d --scale minima=${INSTANCE_NUMBER}
     elif [[ $1 = "status" ]]
     then
+        docker ps --format 'table {{.Names}}\t{{.Status}}'
         for CT_NAME in $(GET_CT_NAMES_BY_IMAGE_NAME minimaglobal/minima)
         do
             IPS=$(GET_IPS_BY_CT_NAME $CT_NAME)
