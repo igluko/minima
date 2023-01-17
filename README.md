@@ -38,13 +38,9 @@ incentivecash uid:xxxxxxxxxxxxxxxxxx
 ```
 incentivecash
 ```
-### Check status
+## Check status
 ```
-status
-```
-
-```
-exit
+minima status
 ```
 
 # Restart containers
