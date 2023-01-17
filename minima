@@ -5,28 +5,70 @@
 # Tested on Hetzner AX-101 servers
 ###
 
-# Helpful to read output when debugging
-# set -x
+SCRIPT=$(realpath $0)
+SCRIPT_PATH=$(dirname $SCRIPT)
 
-#https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-NC='\033[0m' # No Color
-
-# Strict mode
-# set -eEuo pipefail
-set -eEu
-trap 'printf "${RED}Failed on line: $LINENO at command:${NC}\n$BASH_COMMAND\nexit $?\n"' ERR
-# IFS=$'\n\t'
-
-# read envivoments
-source  /etc/environment
-# get real path to script
-SCRIPT=`realpath $0`
-SCRIPTPATH=`dirname $SCRIPT`
 # add binary folders to local path
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# function STRICT {
+    # Exit immediately if any command exits with a non-zero status
+    set -e
+
+    # When using -E , you can catch the error with trap command and handle it accordingly.
+    set -E
+    trap 'printf "\033[0;31mFailed on line: $LINENO at command:\033[0m\n$BASH_COMMAND\nexit $?\n"' ERR
+
+    # Treat unset variables as an error and exit immediately
+    set -u
+
+    # Causes a pipeline to return the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully
+    set -o pipefail
+
+    # Print each command as it is executed
+    # set -x
+
+    # IFS (Internal Field Separator) variable is used to specify the delimiter(s) used when parsing strings into fields or when splitting strings
+    IFS=$'\n\t'
+# }
+
+# function COLOR {
+    #https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    ORANGE='\033[0;33m'
+    NC='\033[0m' # No Color
+# }
+
+function WHIPTAIL {
+    IFS=$'\n\t'
+    local INPUT=("$@")
+    local VARIANTS=()
+
+    for ITEM in "${INPUT[@]}"
+    do
+        VARIANTS+=("$ITEM")
+        VARIANTS+=("ON")
+    done
+
+    whiptail --separate-output --noitem --checklist "Choose options" 10 35 5 \
+        "${VARIANTS[@]}" 3>&1 1>&2 2>&3
+}
+
+function INSTALL {
+    for NAME in $*
+    do
+        local DPKG="dpkg -l | awk '\$2==\"${NAME}\" && \$1==\"ii\" {print \$1,\$2,\$3}'"
+        if ! eval "${DPKG} | grep -q ii"
+        then
+            apt update -y || true
+            apt install -y ${NAME}
+        fi
+        # Проверяем результат
+        eval "${DPKG}"
+    done
+}
+
 
 # Read variable from file
 function load {
@@ -60,7 +102,7 @@ function update {
     then
         local FILE="${2}"
     else
-        local FILE="${SCRIPTPATH}/.env"
+        local FILE="${SCRIPT_PATH}/.env"
     fi
 
     load ${FILE}
@@ -77,7 +119,7 @@ function update {
     # echo "$VARIABLE is $VALUE"
 }
 
-function apt-install {
+function INSTALL {
     for NAME in $*
     do
         local DPKG="dpkg -l | awk '\$2==\"${NAME}\" && \$1==\"ii\" {print \$1,\$2,\$3}'"
@@ -116,19 +158,30 @@ function insert {
 
 #-----------------------START-----------------------#
 
+function GET_CT_NAMES_BY_IMAGE_NAME {
+    local image_name=$1
+    docker ps -f "ancestor=$image_name" --format "{{.Names}}"
+}
+
+function GET_NETWORK {
+    local CT_NAME=$1
+    docker network ls | grep minima | awk '{print $1}'
+}
+
+
 # Загружаем файл с настройками
-load ${SCRIPTPATH}/.env
+load ${SCRIPT_PATH}/.env
 
 if [[ $# -eq 0 ]]
 then
     #Добвляем папку скрипта в PATH
-    insert ~/.bashrc "export PATH=\"$PATH:${SCRIPTPATH}\""
+    insert ~/.bashrc "export PATH=\"$PATH:${SCRIPT_PATH}\""
     set +eEu
     source ~/.bashrc
     set -eEu
 
     # Ставим пакеты
-    apt-install curl docker docker-compose jq
+    INSTALL curl docker docker-compose jq
 
     # Скачиваем compose файл
     wget -N https://raw.githubusercontent.com/igluko/minima/main/docker-compose.yml
@@ -149,7 +202,7 @@ then
     if ! [[ -v MDS_PASSWORD ]]
     then
         # Генерируем пароль, если старого пароля нет
-        MDS_PASSWORD=$(tr -dc a-z0-9 </dev/urandom | head -c 20 ; echo '')
+        MDS_PASSWORD=$(tr -dc a-z0-9 </dev/urandom | head -c 20 || true ; echo '')
     fi
     printf "\n${ORANGE}Warning. Minima does not support uppercase characters in passwords${NC}\n"
     update MDS_PASSWORD
@@ -168,10 +221,10 @@ then
     # Проверяем
     docker-compose ps -a
 
-    # Отдаем ссылки для подклчения к MDS
+    # Отдаем ссылки для подключения к MDS
     printf  "\n${ORANGE}Адреса для доступа к MiniDapp ниже:${NC}\n\n"
     IP=$(curl -s https://api.ipify.org)
-    PORTS=$(docker ps --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{(index (index .NetworkSettings.Ports "9003/tcp") 0).HostPort}}' 2>/dev/null || true) 
+    PORTS=$(docker ps -f "ancestor=minimaglobal/minima" --format '{{.Names}}' | xargs -I {} docker inspect {} --format '{{(index (index .NetworkSettings.Ports "9003/tcp") 0).HostPort}}' 2>/dev/null || true) 
     for PORT in $PORTS
     do
         printf "https://${IP}:$PORT\n\n"
@@ -184,6 +237,12 @@ then
     then
         docker-compose stop
         docker-compose up -d --scale minima=${INSTANCE_NUMBER}
+    elif [[ $1 = "status" ]]
+    then
+        for CT_NAME in $(GET_CT_NAMES_BY_IMAGE_NAME minimaglobal/minima)
+        do
+            echo $CT_NAME
+        done
     else
         docker exec -it root_minima_${1} minima
     fi
