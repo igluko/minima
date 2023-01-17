@@ -13,6 +13,11 @@ services:
     mem_limit: 2008868k
     labels:
         - "com.centurylinklabs.watchtower.enable=true"
+    healthcheck:
+      test: ["CMD", "minima", "check"]
+      interval: 30s
+      timeout: 10s
+      retries: 1
   watchtower:
     image: containrrr/watchtower
     restart: always

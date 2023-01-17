@@ -159,13 +159,18 @@ function insert {
 #-----------------------START-----------------------#
 
 function GET_CT_NAMES_BY_IMAGE_NAME {
-    local image_name=$1
-    docker ps -f "ancestor=$image_name" --format "{{.Names}}"
+    local IMAGE_NAME=${1}
+    docker ps -f "ancestor=${IMAGE_NAME}" --format "{{.Names}}"
 }
 
-function GET_NETWORK {
-    local CT_NAME=$1
-    docker network ls | grep minima | awk '{print $1}'
+function GET_IPS_BY_CT_NAME {
+    local CT_NAME=${1}
+    docker inspect ${CT_NAME} | jq -r '.[].NetworkSettings.Networks[].IPAddress'
+}
+
+function GET_MINIMA_STATUS_BY_IP {
+    local IP=${1}
+    curl -s ${IP}:9005/status | jq .response.chain
 }
 
 # Загружаем файл с настройками
@@ -241,8 +246,15 @@ then
     then
         for CT_NAME in $(GET_CT_NAMES_BY_IMAGE_NAME minimaglobal/minima)
         do
-            echo $CT_NAME
+            IPS=$(GET_IPS_BY_CT_NAME $CT_NAME)
+            for IP in ${IPS}
+            do
+                GET_MINIMA_STATUS_BY_IP ${IP}
+            done
         done
+    elif [[ $1 = "status" ]]
+    then
+        return true
     else
         docker exec -it root_minima_${1} minima
     fi
