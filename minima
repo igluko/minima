@@ -170,7 +170,8 @@ function GET_IPS_BY_CT_NAME {
 
 function GET_MINIMA_STATUS_BY_IP {
     local IP=${1}
-    curl -s ${IP}:9005/status | jq .response.chain
+    curl -s ${IP}:9005/status | jq .
+    curl -s ${IP}:9005/incentivecash  | jq .
 }
 
 # Загружаем файл с настройками
@@ -257,6 +258,3 @@ then
         docker exec -it root_minima_${1} minima
     fi
 fi
-
-
-

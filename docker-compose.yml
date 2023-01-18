@@ -5,6 +5,7 @@ services:
     environment:
       minima_mdspassword: UCwRo4iMnxZ0zRvF7jFw
       minima_server: "true"
+      TZ: Europe/Moscow
     ports:
       - 9001-9004:9001-9004
     volumes:
