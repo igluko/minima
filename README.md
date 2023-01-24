@@ -17,6 +17,11 @@ minima
 minima status
 ```
 
+## Backup
+```
+minima backup
+```
+
 ## Incentivecash
 
 ### Connect to 1-st conteiner:
